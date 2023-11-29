@@ -37,12 +37,6 @@ jobs:
       - name: Build static-viz frontend
         run: yarn build-static-viz
 
-      - name: Download Static Viz Bundle Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: static-viz-bundle-${{ github.sha }}
-          path: resources/frontend_client/app/dist
-
       - name: Run tests
         if: matrix.java-version != 21
         run: clojure -X:dev:ci:test:${{ matrix.edition }}:${{ matrix.edition }}-dev
