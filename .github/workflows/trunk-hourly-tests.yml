@@ -1,4 +1,4 @@
-name: Backend
+name: Upload Test Results to Trunk (Hourly)
 
 on:
   schedule:
