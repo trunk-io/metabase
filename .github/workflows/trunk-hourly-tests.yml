@@ -15,7 +15,7 @@ env:
 jobs:
 
   be-tests:
-    runs-on: [self-hosted, linux, monorepo, x86, 2xlarge]
+    runs-on: ubuntu-22.04
     name: be-tests-java-${{ matrix.java-version }}-${{ matrix.edition }}
     timeout-minutes: 60
     strategy:
