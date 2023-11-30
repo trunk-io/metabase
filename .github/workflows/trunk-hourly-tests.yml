@@ -46,7 +46,7 @@ jobs:
         run: clojure -X:dev:ci:test:${{ matrix.edition }}:${{ matrix.edition }}-dev
 
       - name: Upload results
-        uses: ./.github/actions/upload_junit_xml
+        uses: ./.github/actions/upload-junit-xml
         with:
           filepaths: target/junit/**/*_test.xml
           trunk_token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
