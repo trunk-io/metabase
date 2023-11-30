@@ -49,4 +49,5 @@ jobs:
         run: ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  target/junit/**/*_test.xml
         env:
           REPO_URL: ${{ github.repositoryUrl }}
+          TRUNK_LOG_LEVEL: info
         continue-on-error: true
