@@ -45,12 +45,8 @@ jobs:
         if: matrix.java-version == 21 && github.ref_name == 'master'
         run: clojure -X:dev:ci:test:${{ matrix.edition }}:${{ matrix.edition }}-dev
 
-      - name: debug print xml
-        run: cat target/junit/metabase.pulse_test.xml; cat metabase.task.follow_up_emails_test.xml
-
       - name: Upload results
-        run: ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  target/junit/metabase.pulse_test.xml; ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }} metabase.task.follow_up_emails_test.xml
+        run: ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  target/junit/**/*_test.xml
         env:
           REPO_URL: ${{ github.repositoryUrl }}
         continue-on-error: true
-
