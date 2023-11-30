@@ -46,7 +46,7 @@ jobs:
         run: clojure -X:dev:ci:test:${{ matrix.edition }}:${{ matrix.edition }}-dev
 
       - name: debug print xml
-        run: find target/**/*.xml -print
+        run: cat target/junit/metabase.pulse_test.xml
 
       - name: Upload results
         run: ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  target/junit/**/*_test.xml
