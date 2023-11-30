@@ -49,7 +49,7 @@ jobs:
         run: find target/**/*.xml -print
 
       - name: Upload results
-        uses: ./.github/actions/upload-junit-xml
-        with:
-          filepaths: target/junit/**/*_test.xml
-          trunk_token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
+        run: ./.trunk-ci-analytics/metrics-uploader-linux-x64 metrics upload-tests --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  target/junit/**/*_test.xml
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+        continue-on-error: true
