@@ -1,0 +1,19 @@
+name: Trunk Sync Fork
+
+on:
+  schedule:
+    # Run every 10 minutes.
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Run Fork Sync
+      uses: tgymnich/fork-sync@v1.8
+      with:
+        owner: metabase
+        base: master
+        head: master
