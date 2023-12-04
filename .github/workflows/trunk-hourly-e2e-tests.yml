@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 25
     strategy:
       matrix:
-        edition: [ee]
+        edition: [ee, oss]
     env:
       MB_EDITION: ${{ matrix.edition }}
       INTERACTIVE: false
