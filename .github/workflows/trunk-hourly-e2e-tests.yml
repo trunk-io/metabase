@@ -30,7 +30,7 @@ jobs:
       matrix:
         edition: [ee, oss]
     env:
-      MB_EDITION: ${{ matrix.edition }}
+      MB_EDITION: oss
       INTERACTIVE: false
     steps:
       - uses: actions/checkout@v3
@@ -51,11 +51,11 @@ jobs:
 
   e2e-tests:
     needs: [build, e2e-matrix-builder]
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-22.04
     timeout-minutes: 90
     name: e2e-tests-${{ matrix.name }}-${{ matrix.edition }}
     env:
-      MB_EDITION: ${{ matrix.edition }}
+      MB_EDITION: oss
       DISPLAY: ""
       QA_DB_ENABLED: true
       # Any env starting with `CYPRESS_` will be available to all Cypress tests via `Cypress.env()`

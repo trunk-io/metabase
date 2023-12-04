@@ -21,8 +21,8 @@ runs:
           const defaultOptions = {
             "java-version": java,
             runner: defaultRunner,
-            edition: "ee",
-            context: "folder"
+            edition: "oss",
+            context: "oss-subset"
           };
 
           const testSets = [
