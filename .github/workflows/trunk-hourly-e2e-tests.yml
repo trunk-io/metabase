@@ -21,6 +21,8 @@ jobs:
       - name: Generate matrix for E2E tests
         id: e2e-matrix
         uses: ./.github/actions/build-e2e-matrix
+    env:
+      MB_EDITION: oss
 
   build:
     needs: [e2e-matrix-builder]
@@ -119,6 +121,9 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
+      - run: find -name "cypress/reports/mochareports/*.xml"
+      - run: cypress/reports/mochareports/junit.xml
+
       - name: Run slow and resource-intensive Cypress tests
         if: matrix.name == 'slow' && github.event_name != 'schedule'
         run: |
@@ -126,6 +131,9 @@ jobs:
           --env grepTags="@slow",grepOmitFiltered=true \
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+
+      - run: find -name "cypress/reports/mochareports/*.xml"
+      - run: cypress/reports/mochareports/junit.xml
 
       - name: Run Flaky Cypress tests
         if: matrix.name == 'flaky' && github.event_name != 'schedule'
@@ -135,6 +143,9 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
+      - run: find -name "cypress/reports/mochareports/*.xml"
+      - run: cypress/reports/mochareports/junit.xml
+
       - name: Run EE Cypress tests on ${{ matrix.name }}
         if: matrix.context == 'folder' && github.event_name != 'schedule'
         run: |
@@ -142,6 +153,9 @@ jobs:
           --env grepTags="-@slow+-@mongo+-@flaky --@quarantine",grepOmitFiltered=true \
           --folder ${{ matrix.name }} \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+
+      - run: find -name "cypress/reports/mochareports/*.xml"
+      - run: cypress/reports/mochareports/junit.xml
 
       - name: Run E2E tests that depend on Mongo
         if: matrix.name == 'mongo'
@@ -153,13 +167,5 @@ jobs:
         env:
           CYPRESS_QA_DB_MONGO: true
 
-      - name: Upload Cypress Artifacts upon failure
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-recording-${{ matrix.name }}-${{ matrix.edition }}
-          path: |
-            ./cypress
-            ./logs/test.log
-          if-no-files-found: ignore
-
+      - run: find -name "cypress/reports/mochareports/*.xml"
+      - run: cypress/reports/mochareports/junit.xml
