@@ -174,7 +174,9 @@ export type MetricDisplayInfo = {
 export type ClauseDisplayInfo = Pick<
   ColumnDisplayInfo,
   "name" | "displayName" | "longDisplayName" | "table"
->;
+> & {
+  isNamed?: boolean;
+};
 
 export type AggregationClauseDisplayInfo = ClauseDisplayInfo;
 
@@ -394,7 +396,12 @@ export type FKDetailsDrillThruInfo =
 
 export type PivotDrillThruInfo = BaseDrillThruInfo<"drill-thru/pivot">;
 
-export type FKFilterDrillThruInfo = BaseDrillThruInfo<"drill-thru/fk-filter">;
+export type FKFilterDrillThruInfo =
+  BaseDrillThruInfo<"drill-thru/fk-filter"> & {
+    tableName: string;
+    columnName: string;
+  };
+
 export type DistributionDrillThruInfo =
   BaseDrillThruInfo<"drill-thru/distribution">;
 
