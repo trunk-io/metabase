@@ -128,7 +128,7 @@ const mainConfig = {
   numTestsKeptInMemory: process.env["CI"] ? 1 : 50,
   reporter: "mocha-junit-reporter",
   reporterOptions: {
-    mochaFile: "./cypress/reports/mochareports/junit.xml",
+    mochaFile: "./cypress/reports/mochareports/junit.[hash].xml",
   },
   retries: {
     runMode: 2,

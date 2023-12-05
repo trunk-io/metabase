@@ -123,10 +123,9 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
-      - run: find -name "cypress/reports/mochareports/*.xml"
-      - run: cat cypress/reports/mochareports/junit.xml
+      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit.xml"
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
@@ -140,10 +139,9 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
-      - run: find -name "cypress/**/*junit.xml"
-      - run: cat cypress/reports/mochareports/junit.xml
+      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit.xml"
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
@@ -157,10 +155,9 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
-      - run: find -name "cypress/**/*junit.xml"
-      - run: cat cypress/reports/mochareports/junit.xml
+      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit.xml"
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
@@ -174,10 +171,9 @@ jobs:
           --folder ${{ matrix.name }} \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
-      - run: find -name "cypress/**/*junit.xml"
-      - run: cat cypress/reports/mochareports/junit.xml
+      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit.xml"
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
@@ -193,10 +189,9 @@ jobs:
         env:
           CYPRESS_QA_DB_MONGO: true
 
-      - run: find -name "cypress/**/*junit.xml"
-      - run: cat cypress/reports/mochareports/junit.xml
+      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit.xml"
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
