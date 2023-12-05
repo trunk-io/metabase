@@ -116,7 +116,7 @@ jobs:
       - run: mkdir -p cypress/reports/mochareports
 
       - name: Run OSS-specific Cypress tests
-        if: matrix.edition == 'oss' && github.event_name != 'schedule'
+        if: matrix.edition == 'oss'
         run: |
           yarn run test-cypress-run \
           --env grepTags=@OSS,grepOmitFiltered=true \
@@ -132,7 +132,7 @@ jobs:
         continue-on-error: true
 
       - name: Run slow and resource-intensive Cypress tests
-        if: matrix.name == 'slow' && github.event_name != 'schedule'
+        if: matrix.name == 'slow'
         run: |
           yarn run test-cypress-run \
           --env grepTags="@slow",grepOmitFiltered=true \
@@ -148,7 +148,7 @@ jobs:
         continue-on-error: true
 
       - name: Run Flaky Cypress tests
-        if: matrix.name == 'flaky' && github.event_name != 'schedule'
+        if: matrix.name == 'flaky'
         run: |
           yarn run test-cypress-run \
           --env grepTags="@flaky",grepOmitFiltered=true \
@@ -164,7 +164,7 @@ jobs:
         continue-on-error: true
 
       - name: Run EE Cypress tests on ${{ matrix.name }}
-        if: matrix.context == 'folder' && github.event_name != 'schedule'
+        if: matrix.context == 'folder'
         run: |
           yarn run test-cypress-run \
           --env grepTags="-@slow+-@mongo+-@flaky --@quarantine",grepOmitFiltered=true \
