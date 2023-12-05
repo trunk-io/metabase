@@ -132,7 +132,6 @@ jobs:
         continue-on-error: true
 
       - name: Run slow and resource-intensive Cypress tests
-        if: matrix.name == 'slow'
         run: |
           yarn run test-cypress-run \
           --env grepTags="@slow",grepOmitFiltered=true \
@@ -148,7 +147,6 @@ jobs:
         continue-on-error: true
 
       - name: Run Flaky Cypress tests
-        if: matrix.name == 'flaky'
         run: |
           yarn run test-cypress-run \
           --env grepTags="@flaky",grepOmitFiltered=true \
