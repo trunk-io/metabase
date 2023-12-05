@@ -2,7 +2,7 @@ name: Upload E2E Test Results to Trunk (Hourly)
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch: {}
 
 concurrency:
@@ -21,6 +21,8 @@ jobs:
       - name: Generate matrix for E2E tests
         id: e2e-matrix
         uses: ./.github/actions/build-e2e-matrix
+    env:
+      MB_EDITION: oss
 
   build:
     needs: [e2e-matrix-builder]
@@ -30,7 +32,7 @@ jobs:
       matrix:
         edition: [ee, oss]
     env:
-      MB_EDITION: ${{ matrix.edition }}
+      MB_EDITION: oss
       INTERACTIVE: false
     steps:
       - uses: actions/checkout@v3
@@ -51,11 +53,11 @@ jobs:
 
   e2e-tests:
     needs: [build, e2e-matrix-builder]
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-22.04
     timeout-minutes: 90
     name: e2e-tests-${{ matrix.name }}-${{ matrix.edition }}
     env:
-      MB_EDITION: ${{ matrix.edition }}
+      MB_EDITION: oss
       DISPLAY: ""
       QA_DB_ENABLED: true
       # Any env starting with `CYPRESS_` will be available to all Cypress tests via `Cypress.env()`
@@ -111,6 +113,8 @@ jobs:
       - name: Run Snowplow micro
         uses: ./.github/actions/run-snowplow-micro
 
+      - run: mkdir -p cypress/reports/mochareports
+
       - name: Run OSS-specific Cypress tests
         if: matrix.edition == 'oss' && github.event_name != 'schedule'
         run: |
@@ -118,6 +122,14 @@ jobs:
           --env grepTags=@OSS,grepOmitFiltered=true \
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+
+      - run: ls -l ./cypress/reports/mochareports/
+      - name: Upload results
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          RUST_LOG: info
+        continue-on-error: true
 
       - name: Run slow and resource-intensive Cypress tests
         if: matrix.name == 'slow' && github.event_name != 'schedule'
@@ -127,6 +139,14 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
+      - run: ls -l ./cypress/reports/mochareports/
+      - name: Upload results
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          RUST_LOG: info
+        continue-on-error: true
+
       - name: Run Flaky Cypress tests
         if: matrix.name == 'flaky' && github.event_name != 'schedule'
         run: |
@@ -135,6 +155,14 @@ jobs:
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
 
+      - run: ls -l ./cypress/reports/mochareports/
+      - name: Upload results
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          RUST_LOG: info
+        continue-on-error: true
+
       - name: Run EE Cypress tests on ${{ matrix.name }}
         if: matrix.context == 'folder' && github.event_name != 'schedule'
         run: |
@@ -142,6 +170,14 @@ jobs:
           --env grepTags="-@slow+-@mongo+-@flaky --@quarantine",grepOmitFiltered=true \
           --folder ${{ matrix.name }} \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+
+      - run: ls -l ./cypress/reports/mochareports/
+      - name: Upload results
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          RUST_LOG: info
+        continue-on-error: true
 
       - name: Run E2E tests that depend on Mongo
         if: matrix.name == 'mongo'
@@ -153,13 +189,10 @@ jobs:
         env:
           CYPRESS_QA_DB_MONGO: true
 
-      - name: Upload Cypress Artifacts upon failure
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: cypress-recording-${{ matrix.name }}-${{ matrix.edition }}
-          path: |
-            ./cypress
-            ./logs/test.log
-          if-no-files-found: ignore
-
+      - run: ls -l ./cypress/reports/mochareports/
+      - name: Upload results
+        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          RUST_LOG: info
+        continue-on-error: true
