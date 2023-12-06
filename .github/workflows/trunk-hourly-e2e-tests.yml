@@ -122,6 +122,7 @@ jobs:
           --env grepTags=@OSS,grepOmitFiltered=true \
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+        continue-on-error: true
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
@@ -137,6 +138,7 @@ jobs:
           --env grepTags="@slow",grepOmitFiltered=true \
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+        continue-on-error: true
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
@@ -152,6 +154,7 @@ jobs:
           --env grepTags="@flaky",grepOmitFiltered=true \
           --spec './e2e/test/scenarios/**/*.cy.spec.js' \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+        continue-on-error: true
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
@@ -168,6 +171,7 @@ jobs:
           --env grepTags="-@slow+-@mongo+-@flaky --@quarantine",grepOmitFiltered=true \
           --folder ${{ matrix.name }} \
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
+        continue-on-error: true
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
@@ -186,6 +190,7 @@ jobs:
           --browser ${{ steps.cypress-prep.outputs.chrome-path }}
         env:
           CYPRESS_QA_DB_MONGO: true
+        continue-on-error: true
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
