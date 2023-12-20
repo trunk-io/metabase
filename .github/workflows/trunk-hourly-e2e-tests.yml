@@ -192,10 +192,17 @@ jobs:
           CYPRESS_QA_DB_MONGO: true
         continue-on-error: true
 
-      - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
         run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
         env:
           REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
+        continue-on-error: true
+
+      - name: Upload results
+        run: ./.trunk-ci-analytics/trunk-metrics-cli upload --custom-tags="tests=e2e" --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }} --org=trunk-staging-org --junit-paths="cypress/reports/**/*junit*.xml"
+        env:
+          REPO_URL: ${{ github.repositoryUrl }}
+          TRUNK_LOG: debug
+
         continue-on-error: true
