@@ -46,11 +46,11 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
-        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        uses: trunk-io/trunk-analytics-uploader@v0.1.0
         with:
           junit_paths: target/junit/**/*_test.xml
           org_url_slug: trunk-staging-org
-          token: ${{ secrets.TRUNK_API_TOKEN }} # TRUNK_DEBUGGER_TOKEN?
+          token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
