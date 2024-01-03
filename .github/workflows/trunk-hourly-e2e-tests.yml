@@ -2,7 +2,7 @@ name: Upload E2E Test Results to Trunk (Hourly)
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: "*/10 * * * *"
   workflow_dispatch: {}
 
 concurrency:
@@ -10,7 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   e2e-matrix-builder:
     runs-on: ubuntu-22.04
     timeout-minutes: 5
@@ -126,9 +125,14 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
 
@@ -142,9 +146,14 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
 
@@ -158,9 +167,14 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
 
@@ -175,9 +189,14 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
 
@@ -193,16 +212,26 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
 
       - name: Upload results
-        run: ./.trunk-ci-analytics/trunk-metrics-cli upload --custom-tags="tests=e2e" --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }} --org=trunk-staging-org --junit-paths="cypress/reports/**/*junit*.xml"
+        uses: trunk-io/trunk-analytics-uploader@main # TODO: create v1 release tag
+        with:
+          junit_paths: cypress/reports/**/*junit*.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_API_TOKEN }}
+          repo_url: ${{ github.repositoryUrl }}
+          tags: tests=e2e
+          dry_run: false
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           TRUNK_LOG: debug
-
         continue-on-error: true
