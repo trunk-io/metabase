@@ -131,7 +131,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -152,7 +151,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -173,7 +171,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -195,7 +192,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -218,7 +214,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -231,7 +226,6 @@ jobs:
           token: ${{ secrets.TRUNK_API_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
           tags: tests=e2e
-          dry_run: false
         env:
           TRUNK_LOG: debug
         continue-on-error: true

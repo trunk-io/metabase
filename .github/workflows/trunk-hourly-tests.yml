@@ -52,7 +52,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_API_TOKEN }} # TRUNK_DEBUGGER_TOKEN?
           repo_url: ${{ github.repositoryUrl }}
-          dry_run: false
         env:
           RUST_LOG: info
         continue-on-error: true
