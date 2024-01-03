@@ -2,7 +2,7 @@ name: Upload Test Results to Trunk (Hourly)
 
 on:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: "0 1 * * *"
   workflow_dispatch: {}
 
 concurrency:
@@ -13,7 +13,6 @@ env:
   CLJ_KONDO_VERSION: "2023.09.07"
 
 jobs:
-
   be-tests:
     runs-on: ubuntu-22.04
     name: be-tests-java-${{ matrix.java-version }}-${{ matrix.edition }}
@@ -47,8 +46,11 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
-        run: ./.trunk-ci-analytics/bin --token=${{ secrets.TRUNK_DEBUGGER_TOKEN }}  --input="target/junit/**/*_test.xml"
+        uses: trunk-io/trunk-analytics-uploader@v0.1.0
+        with:
+          junit_paths: target/junit/**/*_test.xml
+          org_url_slug: trunk-staging-org
+          token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          REPO_URL: ${{ github.repositoryUrl }}
           RUST_LOG: info
         continue-on-error: true
