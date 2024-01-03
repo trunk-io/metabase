@@ -50,7 +50,7 @@ jobs:
         with:
           junit_paths: target/junit/**/*_test.xml
           org_url_slug: trunk-staging-org
-          token: ${{ secrets.TRUNK_API_TOKEN }}
+          token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
           repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
