@@ -130,7 +130,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -150,7 +149,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -170,7 +168,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -191,7 +188,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -213,7 +209,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
         env:
           RUST_LOG: info
         continue-on-error: true
@@ -224,7 +219,6 @@ jobs:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
-          repo_url: ${{ github.repositoryUrl }}
           tags: tests=e2e
         env:
           TRUNK_LOG: debug
