@@ -131,7 +131,8 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
 
       - name: Run slow and resource-intensive Cypress tests
@@ -150,7 +151,8 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
 
       - name: Run Flaky Cypress tests
@@ -169,7 +171,8 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
 
       - name: Run EE Cypress tests on ${{ matrix.name }}
@@ -189,7 +192,8 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
 
       - name: Run E2E tests that depend on Mongo
@@ -210,7 +214,8 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
 
       - name: Upload results
@@ -221,5 +226,6 @@ jobs:
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
           tags: tests=e2e
         env:
-          TRUNK_LOG: debug
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true

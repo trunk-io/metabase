@@ -52,5 +52,6 @@ jobs:
           org_url_slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
-          RUST_LOG: info
+          TRUNK_LOG: info
+          TRUNK_API_ADDRESS: https://api.trunk-staging.io:5022
         continue-on-error: true
