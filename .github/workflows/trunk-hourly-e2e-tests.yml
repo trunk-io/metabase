@@ -125,7 +125,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
@@ -144,7 +144,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
@@ -163,7 +163,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
@@ -183,7 +183,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
@@ -204,7 +204,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
@@ -214,7 +214,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
-        uses: trunk-io/analytics-uploader@v0.1.0
+        uses: trunk-io/analytics-uploader@main
         with:
           junit_paths: cypress/reports/**/*junit*.xml
           org_url_slug: trunk-staging-org
