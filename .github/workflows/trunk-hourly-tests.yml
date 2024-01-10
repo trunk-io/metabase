@@ -48,8 +48,8 @@ jobs:
       - name: Upload results
         uses: trunk-io/analytics-uploader@main
         with:
-          junit_paths: target/junit/**/*_test.xml
-          org_url_slug: trunk-staging-org
+          junit-paths: target/junit/**/*_test.xml
+          org-slug: trunk-staging-org
           token: ${{ secrets.TRUNK_DEBUGGER_TOKEN }}
         env:
           TRUNK_LOG: info
