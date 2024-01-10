@@ -125,6 +125,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
@@ -145,6 +146,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
@@ -165,6 +167,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
@@ -186,6 +189,7 @@ jobs:
 
       - run: ls -l ./cypress/reports/mochareports/
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
@@ -208,6 +212,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
@@ -219,6 +224,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload results
+        if: "!cancelled()"
         uses: trunk-io/analytics-uploader@main
         with:
           junit-paths: cypress/reports/**/*junit*.xml
